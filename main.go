@@ -9,6 +9,8 @@ func main() {
 	flag.Parse()
 
 	for _, word := range flag.Args() {
+		fmt.Print(word + "\x20=\x20")
+
 		for i, c := range word {
 			if i%2 == 0 {
 				fmt.Print("\x1b[0;94m" + alphabet[c] + "\x1b[0m ")
@@ -16,6 +18,7 @@ func main() {
 				fmt.Print(alphabet[c] + "\x20")
 			}
 		}
+
 		fmt.Println()
 	}
 }
