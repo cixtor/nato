@@ -3,15 +3,23 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
 )
 
 func main() {
 	flag.Parse()
 
+	disableColors := os.Getenv("NO_COLOR") != ""
+
 	for _, word := range flag.Args() {
 		fmt.Print(word + "\x20=\x20")
 
 		for i, c := range word {
+			if disableColors {
+				fmt.Print(alphabet[c] + "\x20")
+				continue
+			}
+
 			if i%2 == 0 {
 				fmt.Print("\x1b[0;94m" + alphabet[c] + "\x1b[0m ")
 			} else {
