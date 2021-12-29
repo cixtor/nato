@@ -1,21 +1,23 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 )
 
 func main() {
-	flag.Parse()
-
 	enableColors := os.Getenv("NO_COLOR") == ""
 
-	for _, word := range flag.Args() {
+	for i, word := range os.Args {
+		if i == 0 {
+			// skip program's name.
+			continue
+		}
+
 		fmt.Print(word + "\x20=\x20")
 
-		for i, c := range word {
-			if enableColors && i%2 == 0 {
+		for j, c := range word {
+			if enableColors && j%2 == 0 {
 				fmt.Print("\x1b[0;94m" + alphabet[c] + "\x1b[0m ")
 			} else {
 				fmt.Print(alphabet[c] + "\x20")
